@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 return [
-    'storage_dir' => 'C:\\Netarium\\data',
+    'storage_dir' => dirname(__DIR__) . DIRECTORY_SEPARATOR . 'data',
     // 旧bcryptの移行期間だけtrue。全利用者の再設定後はfalseにする。
     'allow_legacy_bcrypt' => true,
     // TLS終端プロキシの接続元IPだけを列挙する。CIDRやホスト名は指定できない。

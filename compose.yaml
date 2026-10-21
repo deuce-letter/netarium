@@ -1,0 +1,23 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Containerfile
+    image: netarium-app:local
+    restart: unless-stopped
+    environment:
+      NETARIUM_STORAGE_DIR: /var/lib/netarium
+    volumes:
+      - ./data:/var/lib/netarium:Z,U
+      - ./config:/var/www/config:ro,Z
+
+  web:
+    build:
+      context: .
+      dockerfile: nginx/Containerfile
+    image: netarium-web:local
+    restart: unless-stopped
+    depends_on:
+      - app
+    ports:
+      - "${NETARIUM_HTTP_BIND:-127.0.0.1}:8080:80"

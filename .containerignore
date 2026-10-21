@@ -1,0 +1,11 @@
+.git/
+.github/
+.vscode/
+.env
+.env.*
+data/
+config/app.php
+tests/
+docs/
+reports/
+coverage/
