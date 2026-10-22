@@ -35,7 +35,7 @@ COPY templates/ ./templates/
 COPY containers/php/entrypoint.sh /usr/local/bin/netarium-entrypoint
 COPY containers/php/zz-netarium.ini /usr/local/etc/php/conf.d/zz-netarium.ini
 
-RUN php -r 'if (PHP_VERSION_ID < 80505) { fwrite(STDERR, "PHP 8.5.5 or newer is required\n"); exit(1); } if (version_compare(SQLite3::version()["versionString"], "3.51.3", "<")) { fwrite(STDERR, "SQLite 3.51.3 or newer is required\n"); exit(1); } foreach (["exif", "fileinfo", "gd", "mbstring", "pdo_sqlite", "session", "sqlite3", "zip"] as $extension) { if (!extension_loaded($extension)) { fwrite(STDERR, "Missing PHP extension: {$extension}\n"); exit(1); } }'
+RUN php -r 'if (PHP_VERSION_ID < 80512) { fwrite(STDERR, "PHP 8.5.12 or newer is required\n"); exit(1); } if (version_compare(SQLite3::version()["versionString"], "3.51.3", "<")) { fwrite(STDERR, "SQLite 3.51.3 or newer is required\n"); exit(1); } foreach (["exif", "fileinfo", "gd", "mbstring", "pdo_sqlite", "session", "sqlite3", "zip"] as $extension) { if (!extension_loaded($extension)) { fwrite(STDERR, "Missing PHP extension: {$extension}\n"); exit(1); } }'
 RUN chmod 0755 /usr/local/bin/netarium-entrypoint
 
 RUN printf '\nclear_env = no\nsecurity.limit_extensions = .php\n' \
